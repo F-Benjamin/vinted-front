@@ -14,13 +14,20 @@ p {
   text-decoration: none;
 }
 
-button {
+button,
+.header-link {
   cursor: pointer;
 }
 
 button,
-input {
+input,
+.header-link {
   outline: none;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
 }
 /* Header */
 .header {
@@ -61,7 +68,8 @@ input {
 .search i {
   font-size: 16px;
 }
-.header-button button {
+.header-button button,
+.header-link {
   margin-right: 10px;
   height: 30px;
   width: 115px;
@@ -258,6 +266,76 @@ ul {
   padding: 0 16px;
   line-height: 36px;
   margin-top: 32px;
+}
+
+/* SignIn */
+
+.signin-container,
+.signin-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.signin-container {
+  justify-content: center;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.signin-form {
+  width: 275px;
+  margin: auto;
+}
+
+.signin-form > input {
+  border: none;
+  height: 35px;
+  color: #bbb;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #fcced3;
+}
+
+.checkbox-container {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.checkbox-container-2 {
+  display: flex;
+}
+
+.checkbox-container-2 input {
+  transform: scale(2);
+  margin-right: 20px;
+}
+
+.checkbox-container span {
+  color: #666;
+}
+
+.checkbox-container p {
+  text-align: left;
+  color: #999;
+  font-size: 12px;
+}
+
+.signin-form button {
+  background-color: #2cb1ba;
+  height: 45px;
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.form-link {
+  color: #2cb1ba;
+  margin-top: 20px;
+  text-decoration: none;
 }
 /* Footer */
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Offer = ({ data, isLoading, id }) => {
+const Offer = ({ data, isLoading }) => {
   return isLoading ? (
     <span>Loading...</span>
   ) : (

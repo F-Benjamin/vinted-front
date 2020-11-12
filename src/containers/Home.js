@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import Header from "../components/Header";
 import Ready from "../components/Ready";
 import Cards from "../components/Cards";
-import Footer from "../components/Footer";
 
 const Home = () => {
   const [data, setData] = useState({});
@@ -25,10 +23,8 @@ const Home = () => {
 
   return (
     <div>
-      <Header />
       <Ready />
       <Cards data={data} isLoading={isLoading} />
-      <Footer />
     </div>
   );
 };
