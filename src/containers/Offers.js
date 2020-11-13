@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 
 const Offers = () => {
   const { id } = useParams();
-  // console.log(id);
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -13,7 +12,7 @@ const Offers = () => {
     const response = await axios.get(
       `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
     );
-    // console.log(response.data);
+
     setData(response.data);
     setIsLoading(false);
   };

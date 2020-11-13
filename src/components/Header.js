@@ -2,7 +2,7 @@ import React from "react";
 import Logo from "../images/Vinted_logo.png";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ token, setUserToken }) => {
   return (
     <div className="header">
       <div className="header-container">
@@ -20,12 +20,24 @@ const Header = () => {
           />
         </div>
         <div className="header-button">
-          <button className="header-link">
-            <Link to={"/signin/"}>S'inscrire</Link>
-          </button>
-          <button className="header-link">
-            <Link to="/login">Se connecter</Link>
-          </button>
+          {token ? (
+            <button
+              onClick={() => {
+                setUserToken(null);
+              }}
+            >
+              Se déconnecter
+            </button>
+          ) : (
+            <>
+              <button className="header-link">
+                <Link to={"/signin/"}>S'inscrire</Link>
+              </button>
+              <button className="header-link">
+                <Link to="/login">Se connecter</Link>
+              </button>
+            </>
+          )}
 
           <button>Vends tes articles</button>
         </div>

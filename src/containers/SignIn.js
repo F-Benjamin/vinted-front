@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import Cookie from "js-cookie";
+import { useHistory } from "react-router-dom";
 
-const SignIn = () => {
+const SignIn = ({ setUserToken }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // console.log(username);
-  const [token, setToken] = useState("");
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,9 +21,14 @@ const SignIn = () => {
         password: password,
       }
     );
-    console.log(response.data);
-    setToken(response.data.token);
-    Cookie.set("token", token, { expires: 10 });
+
+    const newCookie = response.data.token;
+    if (newCookie) {
+      setUserToken(newCookie);
+      history.push("/");
+    } else {
+      alert("Les informations ne sont pas correcte, veuillez ré-essayer");
+    }
   };
 
   return (
