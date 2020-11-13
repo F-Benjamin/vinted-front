@@ -8,10 +8,14 @@ import Offers from "./containers/Offers";
 import LogIn from "./containers/LogIn";
 import SignIn from "./containers/SignIn";
 import Header from "./components/Header";
+import Account from "./containers/Account";
 import Footer from "./components/Footer";
+import Work from "./containers/Work";
 
 function App() {
   const [token, setToken] = useState(Cookie.get("token") || null);
+  const [userAvatar, setUserAvatar] = useState("");
+  const [accountName, setAccountName] = useState("");
 
   const setUserToken = (newToken) => {
     if (newToken) {
@@ -25,16 +29,30 @@ function App() {
 
   return (
     <Router>
-      <Header token={token} setUserToken={setUserToken} />
+      <Header
+        token={token}
+        setUserToken={setUserToken}
+        userAvatar={userAvatar}
+      />
       <Switch>
         <Route path="/offer/:id">
           <Offers />
         </Route>
         <Route path="/login">
-          <LogIn setUserToken={setUserToken} />
+          <LogIn
+            setUserToken={setUserToken}
+            setUserAvatar={setUserAvatar}
+            setAccountName={setAccountName}
+          />
         </Route>
         <Route path="/signin">
-          <SignIn setUserToken={setUserToken} />
+          <SignIn setUserToken={setUserToken} setUserAvatar={setUserAvatar} />
+        </Route>
+        <Route path="/account">
+          <Account accountName={accountName} />
+        </Route>
+        <Route path="/workinprogress">
+          <Work />
         </Route>
         <Route path="/">
           <Home />

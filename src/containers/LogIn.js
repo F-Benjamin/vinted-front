@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
-const LogIn = ({ setUserToken }) => {
+const LogIn = ({ setUserToken, setUserAvatar, setAccountName }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
@@ -19,6 +19,13 @@ const LogIn = ({ setUserToken }) => {
         password: password,
       }
     );
+    const avatar = response.data.account.avatar;
+    setUserAvatar(avatar);
+
+    const accountUsername = response.data.account.username;
+    setAccountName(accountUsername);
+    // console.log(response.data.account.username);
+
     const newCookie = response.data.token;
     if (newCookie) {
       setUserToken(newCookie);
