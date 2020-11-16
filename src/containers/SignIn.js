@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
-const SignIn = ({ setUserToken, setUserAvatar }) => {
+const SignIn = ({ setUserToken, setUserAvatar, setsignInModal }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const history = useHistory();
+  // const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,12 +22,13 @@ const SignIn = ({ setUserToken, setUserAvatar }) => {
       }
     );
 
-    const avatar = response.data.account.avatar.url;
+    const avatar = response.data.account.avatar;
     setUserAvatar(avatar);
     const newCookie = response.data.token;
     if (newCookie) {
       setUserToken(newCookie);
-      history.push("/");
+      // history.push("/");
+      setsignInModal(false);
     } else {
       alert("Les informations ne sont pas correcte, veuillez ré-essayer");
     }
@@ -37,6 +38,7 @@ const SignIn = ({ setUserToken, setUserAvatar }) => {
     <>
       <div className="signin-container">
         <h2>S'inscrire</h2>
+
         <form className="signin-form" onSubmit={handleSubmit}>
           <input
             type="text"
@@ -79,6 +81,14 @@ const SignIn = ({ setUserToken, setUserAvatar }) => {
         <Link className="form-link" to="/login">
           Tu as déjà un compte ? Connecte-toi !
         </Link>
+        <button
+          className="login-button"
+          onClick={() => {
+            setsignInModal(false);
+          }}
+        >
+          Retour
+        </button>
       </div>
     </>
   );

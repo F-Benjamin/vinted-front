@@ -11,11 +11,14 @@ import Header from "./components/Header";
 import Account from "./containers/Account";
 import Footer from "./components/Footer";
 import Work from "./containers/Work";
+import Publish from "./containers/Publish";
 
 function App() {
   const [token, setToken] = useState(Cookie.get("token") || null);
   const [userAvatar, setUserAvatar] = useState("");
   const [accountName, setAccountName] = useState("");
+  const [signInModal, setsignInModal] = useState(false);
+  const [logInModal, setLogInModal] = useState(false);
 
   const setUserToken = (newToken) => {
     if (newToken) {
@@ -33,10 +36,12 @@ function App() {
         token={token}
         setUserToken={setUserToken}
         userAvatar={userAvatar}
+        setsignInModal={setsignInModal}
+        setLogInModal={setLogInModal}
       />
       <Switch>
         <Route path="/offer/:id">
-          <Offers />
+          <Offers token={token} />
         </Route>
         <Route path="/login">
           <LogIn
@@ -51,11 +56,21 @@ function App() {
         <Route path="/account">
           <Account accountName={accountName} />
         </Route>
+        <Route path="/publish">
+          <Publish token={token} />
+        </Route>
         <Route path="/workinprogress">
           <Work />
         </Route>
         <Route path="/">
-          <Home />
+          <Home
+            token={token}
+            setsignInModal={setsignInModal}
+            signInModal={signInModal}
+            logInModal={logInModal}
+            setLogInModal={setLogInModal}
+            setUserToken={setUserToken}
+          />
         </Route>
       </Switch>
       <Footer />

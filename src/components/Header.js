@@ -3,7 +3,13 @@ import Logo from "../images/Vinted_logo.png";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
-const Header = ({ token, setUserToken, userAvatar }) => {
+const Header = ({
+  token,
+  setUserToken,
+  userAvatar,
+  setsignInModal,
+  setLogInModal,
+}) => {
   const history = useHistory();
   return (
     <div className="header">
@@ -45,12 +51,22 @@ const Header = ({ token, setUserToken, userAvatar }) => {
           ) : (
             <>
               <button>
-                <Link className="header-link" to={"/signin/"}>
+                <Link
+                  className="header-link"
+                  onClick={() => {
+                    setsignInModal(true);
+                  }}
+                >
                   S'inscrire
                 </Link>
               </button>
               <button>
-                <Link className="header-link" to="/login">
+                <Link
+                  className="header-link"
+                  onClick={() => {
+                    setLogInModal(true);
+                  }}
+                >
                   Se connecter
                 </Link>
               </button>
@@ -58,9 +74,20 @@ const Header = ({ token, setUserToken, userAvatar }) => {
           )}
 
           <button>
-            <Link className="sold-link" to="/workinprogress">
-              Vends tes articles
-            </Link>
+            {token ? (
+              <Link className="sold-link" to="/publish">
+                Vends tes articles
+              </Link>
+            ) : (
+              <Link
+                className="sold-link"
+                onClick={() => {
+                  setLogInModal(true);
+                }}
+              >
+                Vends tes articles
+              </Link>
+            )}
           </button>
         </div>
       </div>

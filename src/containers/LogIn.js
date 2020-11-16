@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
-const LogIn = ({ setUserToken, setUserAvatar, setAccountName }) => {
+const LogIn = ({
+  setUserToken,
+  // setUserAvatar,
+  // setAccountName,
+  setLogInModal,
+}) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
-  const history = useHistory();
+  // const history = useHistory();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,17 +24,18 @@ const LogIn = ({ setUserToken, setUserAvatar, setAccountName }) => {
         password: password,
       }
     );
-    const avatar = response.data.account.avatar;
-    setUserAvatar(avatar);
+    // const avatar = response.data.account.avatar.url;
+    // setUserAvatar(avatar);
 
-    const accountUsername = response.data.account.username;
-    setAccountName(accountUsername);
+    // const accountUsername = response.data.account.username;
+    // setAccountName(accountUsername);
     // console.log(response.data.account.username);
 
     const newCookie = response.data.token;
     if (newCookie) {
       setUserToken(newCookie);
-      history.push("/");
+      // history.push("/");
+      setLogInModal(false);
     } else {
       alert("Les informations ne sont pas correcte, veuillez ré-essayer");
     }
@@ -37,7 +43,7 @@ const LogIn = ({ setUserToken, setUserAvatar, setAccountName }) => {
 
   return (
     <>
-      <div className="signin-container">
+      <div className="login-container">
         <h2>Se connecter</h2>
         <form className="signin-form" onSubmit={handleSubmit}>
           <input
@@ -61,6 +67,14 @@ const LogIn = ({ setUserToken, setUserAvatar, setAccountName }) => {
         <Link className="form-link" to="/signin">
           Pas encore de compte ? Inscris-toi !
         </Link>
+        <button
+          className="login-button"
+          onClick={() => {
+            setLogInModal(false);
+          }}
+        >
+          Retour
+        </button>
       </div>
     </>
   );

@@ -3,8 +3,17 @@ import axios from "axios";
 
 import Ready from "../components/Ready";
 import Cards from "../components/Cards";
+import SignIn from "../containers/SignIn";
+import LogIn from "../containers/LogIn";
 
-const Home = () => {
+const Home = ({
+  token,
+  signInModal,
+  setsignInModal,
+  logInModal,
+  setLogInModal,
+  setUserToken,
+}) => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -22,10 +31,24 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      <Ready />
-      <Cards data={data} isLoading={isLoading} />
-    </div>
+    <>
+      <div className={signInModal ? "modal-show" : "modal-hidden"}>
+        <SignIn setsignInModal={setsignInModal} setUserToken={setUserToken} />
+      </div>
+      <div className={signInModal ? "modal-show" : "modal-hidden"}>
+        <SignIn setsignInModal={setsignInModal} setUserToken={setUserToken} />
+      </div>
+      <div className={logInModal ? "modal-show" : "modal-hidden"}>
+        <LogIn setLogInModal={setLogInModal} setUserToken={setUserToken} />
+      </div>
+      <div className={logInModal ? "modal-show" : "modal-hidden"}>
+        <LogIn setLogInModal={setLogInModal} setUserToken={setUserToken} />
+      </div>
+      <div className="home-home">
+        <Ready token={token} setLogInModal={setLogInModal} />
+        <Cards data={data} isLoading={isLoading} />
+      </div>
+    </>
   );
 };
 
