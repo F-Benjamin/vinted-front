@@ -40,10 +40,15 @@ const Offer = ({ data, isLoading }) => {
             <p className="name">{data.product_name}</p>
             <p className="description">{data.product_description}</p>
             <div className="offer-avatar-user">
-              <img
-                src={data.owner.account.avatar.url}
-                alt={data.owner.account.username}
-              />
+              {data.owner.account.avatar.url ? (
+                <img
+                  src={data.owner.account.avatar.url}
+                  alt={data.owner.account.username}
+                />
+              ) : (
+                <i class="fas fa-user-circle"></i>
+              )}
+
               <span>{data.owner.account.username}</span>
             </div>
           </div>

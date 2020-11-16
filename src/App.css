@@ -444,6 +444,7 @@ ul {
   border: #2cb1ba solid 1px;
   border-radius: 5px;
   height: 45px;
+  padding: 0 20px;
 }
 
 .label-file {
@@ -458,22 +459,15 @@ ul {
   font-size: 16px;
 }
 
-.input-file {
-  display: none;
+.photos-preview {
+  width: 200px;
+  height: 200px;
 }
 
-input[type="file" i] {
-  appearance: initial;
-  background-color: initial;
-  cursor: default;
-  align-items: baseline;
-  color: inherit;
-  text-overflow: ellipsis;
-  white-space: pre;
-  text-align: start !important;
-  padding: initial;
-  border: initial;
-  overflow: hidden;
+.cadre-text > input {
+  color: #09b1ba;
+  font-weight: bold;
+  display: none;
 }
 
 .text-container {

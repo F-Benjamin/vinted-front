@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+// import Dropzone from "react-dropzone";
 
 const Publish = ({ token }) => {
   const [title, setTitle] = useState("");
@@ -12,6 +13,7 @@ const Publish = ({ token }) => {
   const [color, setColor] = useState("");
   const [city, setCity] = useState("");
   const [file, setFile] = useState("");
+  const [objectUrl, setObjectUrl] = useState("");
 
   const formData = new FormData();
   formData.append("title", title);
@@ -29,13 +31,13 @@ const Publish = ({ token }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(tokens);
+
     const response = await axios.post(
-      "https://vinted-backend-api.herokuapp.com/offer/publish",
+      "https://lereacteur-vinted-api.herokuapp.com/offer/publish",
       formData,
       { headers: { authorization: `Bearer ${tokens}` } }
     );
-    console.log(tokens);
+
     const newOffer = response.data;
     if (newOffer) {
       history.push("/");
@@ -53,22 +55,31 @@ const Publish = ({ token }) => {
             <div className="photos">
               <p>Ajoute tes photos</p>
               <div className="cadre-photos">
-                <div className="cadre-text">
-                  <label for="file" class="label-file">
-                    <span>Ajoute une photo</span>
-                  </label>
-                  <input
-                    id="file"
-                    type="file"
-                    className="input-file"
-                    // multiple={true}
-                    // value={file.name}
-                    onChange={(e) => {
-                      setFile(e.target.files[0]); //.map pour plusieurs photos
-                      console.log(e.target.files[0]);
-                    }}
-                  />
-                </div>
+                <>
+                  {objectUrl ? (
+                    <img
+                      src={objectUrl}
+                      className="photos-preview"
+                      alt="preview"
+                    />
+                  ) : (
+                    <div className="cadre-text">
+                      <label for="file" class="label-file">
+                        <span>Ajoute une photo</span>
+                      </label>
+                      <input
+                        id="file"
+                        type="file"
+                        className="input-file"
+                        // multiple={true}
+                        onChange={(e) => {
+                          setFile(e.target.files[0]); //.map pour plusieurs photos
+                          setObjectUrl(URL.createObjectURL(e.target.files[0]));
+                        }}
+                      />
+                    </div>
+                  )}
+                </>
               </div>
             </div>
             <div className="text-container">
@@ -183,3 +194,36 @@ const Publish = ({ token }) => {
 };
 
 export default Publish;
+
+/*<Dropzone
+                  onDrop={(acceptedFiles) => console.log(acceptedFiles)}
+                >
+                  {({ getRootProps, getInputProps }) => (
+                    <section>
+                      <img
+                        src={objectUrl}
+                        className="photos-preview"
+                        alt="preview"
+                      />
+                      <div {...getRootProps()}>
+                        <input
+                          {...getInputProps()}
+                          className="input-file"
+                          // multiple={true}
+                          onChange={(e) => {
+                            setFile(e.target.files[0]); //.map pour plusieurs photos
+                            setObjectUrl(
+                              URL.createObjectURL(e.target.files[0])
+                            );
+                          }}
+                        />
+
+                        <div className="cadre-text">
+                          <label for="file" class="label-file">
+                            <span>Ajoute une photo</span>
+                          </label>
+                        </div>
+                      </div>
+                    </section>
+                  )}
+                </Dropzone> */
