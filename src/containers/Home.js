@@ -33,16 +33,32 @@ const Home = ({
   return (
     <>
       <div className={signInModal ? "modal-show" : "modal-hidden"}>
-        <SignIn setsignInModal={setsignInModal} setUserToken={setUserToken} />
+        <SignIn
+          setsignInModal={setsignInModal}
+          setUserToken={setUserToken}
+          setLogInModal={setLogInModal}
+        />
       </div>
       <div className={signInModal ? "modal-show" : "modal-hidden"}>
-        <SignIn setsignInModal={setsignInModal} setUserToken={setUserToken} />
+        <SignIn
+          setsignInModal={setsignInModal}
+          setUserToken={setUserToken}
+          setLogInModal={setLogInModal}
+        />
       </div>
       <div className={logInModal ? "modal-show" : "modal-hidden"}>
-        <LogIn setLogInModal={setLogInModal} setUserToken={setUserToken} />
+        <LogIn
+          setLogInModal={setLogInModal}
+          setUserToken={setUserToken}
+          setsignInModal={setsignInModal}
+        />
       </div>
       <div className={logInModal ? "modal-show" : "modal-hidden"}>
-        <LogIn setLogInModal={setLogInModal} setUserToken={setUserToken} />
+        <LogIn
+          setLogInModal={setLogInModal}
+          setUserToken={setUserToken}
+          setsignInModal={setsignInModal}
+        />
       </div>
       <div className="home-home">
         <Ready token={token} setLogInModal={setLogInModal} />

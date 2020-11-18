@@ -3,7 +3,14 @@ import axios from "axios";
 import Offer from "../components/Offer";
 import { useParams } from "react-router-dom";
 
-const Offers = () => {
+const Offers = ({
+  token,
+  setUserToken,
+  signInModal,
+  setsignInModal,
+  logInModal,
+  setLogInModal,
+}) => {
   const { id } = useParams();
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -23,7 +30,17 @@ const Offers = () => {
 
   return (
     <div>
-      <Offer data={data} isLoading={isLoading} id={id} />
+      <Offer
+        data={data}
+        isLoading={isLoading}
+        id={id}
+        token={token}
+        setUserToken={setUserToken}
+        setsignInModal={setsignInModal}
+        signInModal={signInModal}
+        logInModal={logInModal}
+        setLogInModal={setLogInModal}
+      />
     </div>
   );
 };

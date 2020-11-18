@@ -53,7 +53,6 @@ const Publish = ({ token }) => {
           <h2>Vends ton article</h2>
           <form onSubmit={handleSubmit}>
             <div className="photos">
-              <p>Ajoute tes photos</p>
               <div className="cadre-photos">
                 <>
                   {objectUrl ? (
@@ -196,7 +195,7 @@ const Publish = ({ token }) => {
 export default Publish;
 
 /*<Dropzone
-                  onDrop={(acceptedFiles) => console.log(acceptedFiles)}
+     onDrop={(acceptedFiles) => console.log(acceptedFiles)}
                 >
                   {({ getRootProps, getInputProps }) => (
                     <section>
@@ -217,7 +216,6 @@ export default Publish;
                             );
                           }}
                         />
-
                         <div className="cadre-text">
                           <label for="file" class="label-file">
                             <span>Ajoute une photo</span>

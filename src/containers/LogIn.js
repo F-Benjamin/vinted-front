@@ -8,6 +8,7 @@ const LogIn = ({
   // setUserAvatar,
   // setAccountName,
   setLogInModal,
+  setsignInModal,
 }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -64,7 +65,13 @@ const LogIn = ({
           />
           <button type="submit">Se connecter</button>
         </form>
-        <Link className="form-link" to="/signin">
+        <Link
+          className="form-link"
+          onClick={() => {
+            setLogInModal(false);
+            setsignInModal(true);
+          }}
+        >
           Pas encore de compte ? Inscris-toi !
         </Link>
         <button

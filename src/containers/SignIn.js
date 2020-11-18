@@ -3,7 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 // import { useHistory } from "react-router-dom";
 
-const SignIn = ({ setUserToken, setUserAvatar, setsignInModal }) => {
+const SignIn = ({ setUserToken, setsignInModal, setLogInModal }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,8 +22,6 @@ const SignIn = ({ setUserToken, setUserAvatar, setsignInModal }) => {
       }
     );
 
-    const avatar = response.data.account.avatar;
-    setUserAvatar(avatar);
     const newCookie = response.data.token;
     if (newCookie) {
       setUserToken(newCookie);
@@ -78,7 +76,13 @@ const SignIn = ({ setUserToken, setUserAvatar, setsignInModal }) => {
           </div>
           <button type="submit">S'inscrire</button>
         </form>
-        <Link className="form-link" to="/login">
+        <Link
+          className="form-link"
+          onClick={() => {
+            setsignInModal(false);
+            setLogInModal(true);
+          }}
+        >
           Tu as déjà un compte ? Connecte-toi !
         </Link>
         <button

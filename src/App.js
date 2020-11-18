@@ -5,17 +5,17 @@ import Cookie from "js-cookie";
 
 import Home from "./containers/Home";
 import Offers from "./containers/Offers";
-import LogIn from "./containers/LogIn";
-import SignIn from "./containers/SignIn";
+// import LogIn from "./containers/LogIn";
+// import SignIn from "./containers/SignIn";
 import Header from "./components/Header";
 import Account from "./containers/Account";
 import Footer from "./components/Footer";
 import Work from "./containers/Work";
 import Publish from "./containers/Publish";
+import Payment from "./containers/Payment";
 
 function App() {
   const [token, setToken] = useState(Cookie.get("token") || null);
-  const [userAvatar, setUserAvatar] = useState("");
   const [accountName, setAccountName] = useState("");
   const [signInModal, setsignInModal] = useState(false);
   const [logInModal, setLogInModal] = useState(false);
@@ -35,29 +35,38 @@ function App() {
       <Header
         token={token}
         setUserToken={setUserToken}
-        userAvatar={userAvatar}
         setsignInModal={setsignInModal}
         setLogInModal={setLogInModal}
       />
       <Switch>
         <Route path="/offer/:id">
-          <Offers token={token} />
-        </Route>
-        <Route path="/login">
-          <LogIn
+          <Offers
+            token={token}
             setUserToken={setUserToken}
-            setUserAvatar={setUserAvatar}
-            setAccountName={setAccountName}
+            setsignInModal={setsignInModal}
+            signInModal={signInModal}
+            logInModal={logInModal}
+            setLogInModal={setLogInModal}
           />
         </Route>
-        <Route path="/signin">
-          <SignIn setUserToken={setUserToken} setUserAvatar={setUserAvatar} />
-        </Route>
+        {/* <Route path="/login">
+          <LogIn
+            setUserToken={setUserToken}
+            
+            setAccountName={setAccountName}
+          />
+        </Route> */}
+        {/* <Route path="/signin">
+          <SignIn setUserToken={setUserToken}  />
+        </Route> */}
         <Route path="/account">
           <Account accountName={accountName} />
         </Route>
         <Route path="/publish">
           <Publish token={token} />
+        </Route>
+        <Route path="/payment">
+          <Payment token={token} />
         </Route>
         <Route path="/workinprogress">
           <Work />

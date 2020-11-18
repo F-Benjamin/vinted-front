@@ -14,7 +14,6 @@ const Card = ({ data, isLoading }) => {
   ) : (
     <>
       {data.offers.map((product, index) => {
-        // console.log(product.owner.account.avatar);
         return (
           <>
             <div key={index}>
@@ -25,7 +24,7 @@ const Card = ({ data, isLoading }) => {
                       {product.owner.account.avatar ? (
                         <img
                           className="avatar"
-                          src={product.owner.account.avatar}
+                          src={product.owner.account.avatar.url}
                           alt={product.owner.account.username}
                         />
                       ) : (
