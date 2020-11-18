@@ -5,8 +5,6 @@ import Cookie from "js-cookie";
 
 import Home from "./containers/Home";
 import Offers from "./containers/Offers";
-// import LogIn from "./containers/LogIn";
-// import SignIn from "./containers/SignIn";
 import Header from "./components/Header";
 import Account from "./containers/Account";
 import Footer from "./components/Footer";
@@ -16,7 +14,7 @@ import Payment from "./containers/Payment";
 
 function App() {
   const [token, setToken] = useState(Cookie.get("token") || null);
-  const [accountName, setAccountName] = useState("");
+  // const [accountName, setAccountName] = useState("");
   const [signInModal, setsignInModal] = useState(false);
   const [logInModal, setLogInModal] = useState(false);
 
@@ -49,18 +47,8 @@ function App() {
             setLogInModal={setLogInModal}
           />
         </Route>
-        {/* <Route path="/login">
-          <LogIn
-            setUserToken={setUserToken}
-            
-            setAccountName={setAccountName}
-          />
-        </Route> */}
-        {/* <Route path="/signin">
-          <SignIn setUserToken={setUserToken}  />
-        </Route> */}
         <Route path="/account">
-          <Account accountName={accountName} />
+          <Account />
         </Route>
         <Route path="/publish">
           <Publish token={token} />
