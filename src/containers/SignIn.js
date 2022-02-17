@@ -14,7 +14,7 @@ const SignIn = ({ setUserToken, setsignInModal, setLogInModal }) => {
     e.preventDefault();
 
     const response = await axios.post(
-      "https://lereacteur-vinted-api.herokuapp.com/user/signup",
+      "https://vinted-backend-api.herokuapp.com/user/signup",
       {
         email: email,
         username: username,
@@ -25,8 +25,10 @@ const SignIn = ({ setUserToken, setsignInModal, setLogInModal }) => {
     const newCookie = response.data.token;
     if (newCookie) {
       setUserToken(newCookie);
-      // history.push("/");
       setsignInModal(false);
+      setUsername("");
+      setEmail("");
+      setPassword("");
     } else {
       alert("Les informations ne sont pas correcte, veuillez ré-essayer");
     }
@@ -52,7 +54,6 @@ const SignIn = ({ setUserToken, setsignInModal, setLogInModal }) => {
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
-              // console.log(e.target.value);
             }}
           />
           <input
@@ -89,6 +90,9 @@ const SignIn = ({ setUserToken, setsignInModal, setLogInModal }) => {
           className="login-button"
           onClick={() => {
             setsignInModal(false);
+            setUsername("");
+            setEmail("");
+            setPassword("");
           }}
         >
           Retour

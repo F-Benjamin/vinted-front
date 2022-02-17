@@ -3,7 +3,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 // import Dropzone from "react-dropzone";
 
-const Publish = ({ token }) => {
+function Publish({ token }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -12,37 +12,44 @@ const Publish = ({ token }) => {
   const [condition, setCondition] = useState("");
   const [color, setColor] = useState("");
   const [city, setCity] = useState("");
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState({});
   const [objectUrl, setObjectUrl] = useState("");
 
-  const formData = new FormData();
-  formData.append("title", title);
-  formData.append("picture", file);
-  formData.append("description", description);
-  formData.append("price", price);
-  formData.append("brand", brand);
-  formData.append("condition", condition);
-  formData.append("color", color);
-  formData.append("city", city);
-  formData.append("size", size);
-
-  const tokens = token;
   const history = useHistory();
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("picture", file);
+      formData.append("description", description);
+      formData.append("price", price);
+      formData.append("brand", brand);
+      formData.append("condition", condition);
+      formData.append("color", color);
+      formData.append("city", city);
+      formData.append("size", size);
 
-    const response = await axios.post(
-      "https://lereacteur-vinted-api.herokuapp.com/offer/publish",
-      formData,
-      { headers: { authorization: `Bearer ${tokens}` } }
-    );
+      const response = await axios.post(
+        "https://vinted-backend-api.herokuapp.com/offer/publish",
+        formData,
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
-    const newOffer = response.data;
-    if (newOffer) {
-      history.push("/");
-    } else {
-      alert("Les informations ne sont pas correcte, veuillez ré-essayer");
+      if (response.data._id) {
+        history.push(`/offer/${response.data._id}`);
+      } else {
+        alert("Les informations ne sont pas correcte, veuillez ré-essayer");
+      }
+    } catch (error) {
+      console.log("kabe");
+      alert(error.message);
     }
   };
 
@@ -190,7 +197,7 @@ const Publish = ({ token }) => {
       </div>
     </>
   );
-};
+}
 
 export default Publish;
 

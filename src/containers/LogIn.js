@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-// import { useHistory } from "react-router-dom";
 
 const LogIn = ({
   setUserToken,
@@ -13,13 +12,11 @@ const LogIn = ({
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
-  // const history = useHistory();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const response = await axios.post(
-      "https://lereacteur-vinted-api.herokuapp.com/user/login",
+      "https://vinted-backend-api.herokuapp.com/user/login",
       {
         email: email,
         password: password,
@@ -35,7 +32,9 @@ const LogIn = ({
     const newCookie = response.data.token;
     if (newCookie) {
       setUserToken(newCookie);
-      // history.push("/");
+
+      setEmail("");
+      setPassword("");
       setLogInModal(false);
     } else {
       alert("Les informations ne sont pas correcte, veuillez ré-essayer");
@@ -78,6 +77,8 @@ const LogIn = ({
           className="login-button"
           onClick={() => {
             setLogInModal(false);
+            setEmail("");
+            setPassword("");
           }}
         >
           Retour

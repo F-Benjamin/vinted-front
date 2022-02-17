@@ -40,7 +40,7 @@ const Header = ({
                 Se déconnecter
               </button>
 
-              <Link to={"/workinprogress"}>
+              <Link>
                 {userAvatar ? (
                   <img src={userAvatar} alt="userAvatar" className="avatar" />
                 ) : (

@@ -6,9 +6,9 @@ import Cookie from "js-cookie";
 import Home from "./containers/Home";
 import Offers from "./containers/Offers";
 import Header from "./components/Header";
-import Account from "./containers/Account";
+// import Account from "./containers/Account";
 import Footer from "./components/Footer";
-import Work from "./containers/Work";
+
 import Publish from "./containers/Publish";
 import Payment from "./containers/Payment";
 
@@ -47,17 +47,14 @@ function App() {
             setLogInModal={setLogInModal}
           />
         </Route>
-        <Route path="/account">
+        {/* <Route path="/account">
           <Account />
-        </Route>
+        </Route> */}
         <Route path="/publish">
           <Publish token={token} />
         </Route>
         <Route path="/payment">
           <Payment token={token} />
-        </Route>
-        <Route path="/workinprogress">
-          <Work />
         </Route>
         <Route path="/">
           <Home

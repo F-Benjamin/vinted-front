@@ -11,27 +11,29 @@ const PaymentForm = ({ title, amount, username }) => {
   const total = amount + 6;
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
     try {
+      e.preventDefault();
       const cardElement = elements.getElement(CardElement);
 
       const stripeResponse = await stripe.createToken(cardElement, {
         name: `${username}`,
-        currency: "eur",
       });
-      console.log(stripeResponse);
 
       const stripeToken = stripeResponse.token.id;
-      console.log(stripeToken);
 
       const response = await axios.post(
-        "https://lereacteur-vinted-api.herokuapp.com/payment",
-        { token: stripeToken, title: `${title}`, amount: `${total}` }
+        "https://vinted-backend-api.herokuapp.com/payment",
+        {
+          token: stripeToken,
+          title: `${title}`,
+          amount: `${total}`,
+        }
       );
 
       if (response.data.status === "succeeded") {
         setCompleted(true);
+      } else {
+        alert("Une erreur est survenue, veuillez réssayer.");
       }
     } catch (error) {
       console.log(error.message);
@@ -97,7 +99,7 @@ const PaymentForm = ({ title, amount, username }) => {
                           history.push("/");
                         }}
                       >
-                        Paiement effectué
+                        Paiement effectué, cliquer pour retourner à l'acceuil.
                       </button>
                     )}
                   </div>

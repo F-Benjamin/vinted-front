@@ -15,18 +15,17 @@ const Offers = ({
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchData = async () => {
-    const response = await axios.get(
-      `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
-    );
-
-    setData(response.data);
-    setIsLoading(false);
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get(
+        `https://vinted-backend-api.herokuapp.com/offer/${id}`
+      );
+
+      setData(response.data);
+      setIsLoading(false);
+    };
     fetchData();
-  }, []);
+  }, [id]);
 
   return (
     <div>

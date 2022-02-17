@@ -4,7 +4,9 @@ import { Elements } from "@stripe/react-stripe-js";
 import PaymentForm from "../components/PaymentForm";
 import { useLocation } from "react-router-dom";
 
-const stripePromise = loadStripe("pk_test_5z9rSB8XwuAOihoBixCMfL6X");
+const stripePromise = loadStripe(
+  "pk_test_51HoUIuKufYAPhZyndQkhToaLi5cV0Aq1V8AFH3GzsueRypLiAkReyPNUj1knbcz64pYoctAe1pBwQgcxZrQWRNjJ005EYBxoUm"
+);
 
 const Payment = () => {
   const location = useLocation();
